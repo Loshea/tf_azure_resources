@@ -1,11 +1,11 @@
-# $module_name
+# $Azure Terraform Resources
 
-$module_description
+This project contains Terraform modules for working with Azure resources.  Each module is written to include components for various analytics.  Modules are intended to be instantiated using an array of structures, so that each module need only be called one time.
 
 ## Installation
-Create an empty module named $module_name and populate it as shown:
+Create your module in main.tf and list the source as git:
 ```
-module "$module_name" {
-    source = "$github_path"
+module "<resource type>" {
+    source = "git::https://github.com/Loshea/tf_azure_resources.git/modules/<resource type>"
 }
 ```
