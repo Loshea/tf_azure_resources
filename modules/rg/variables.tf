@@ -39,6 +39,18 @@ variable "budget_end_date" {
 }
 
 variable "notification_contact_emails" {
-  type        = list(any)
+  type        = list(string)
   description = "List of email addresses to notify"
+}
+
+variable "notifications" {
+  type = set(object({
+    enabled        = bool
+    threshold      = number
+    operator       = string
+    contact_emails = list(string)
+    contact_roles  = list(string)
+    contact_groups = list(string)
+  }))
+  description = "List of notification thresholds and targets"
 }

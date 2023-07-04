@@ -11,11 +11,11 @@ resource "azurerm_resource_group" "rg" {
 ######################
 resource "azurerm_resource_group_cost_management_view" "rg_cost_view" {
   count = var.create_costview ? 1 : 0
-  name  = "${var.rg_name}costmgtview"
+  name  = "${var.rg_name}perrescostview"
 
-  display_name = "Cost View per Month"
-  chart_type   = "StackedColumn"
-  accumulated  = false
+  display_name = "${var.rg_name} Per-Resource Cost View per Month"
+  chart_type   = "Table"
+  accumulated  = true
 
   resource_group_id = azurerm_resource_group.rg.id
   report_type       = "Usage"
@@ -24,7 +24,7 @@ resource "azurerm_resource_group_cost_management_view" "rg_cost_view" {
   dataset {
     granularity = "Monthly"
     aggregation {
-      name        = "totalCost"
+      name        = "CostByResource"
       column_name = "Cost"
     }
   }
@@ -36,11 +36,12 @@ resource "azurerm_resource_group_cost_management_view" "rg_cost_view" {
 ######################
 
 #TODO: Variableize the notification block
+#TODO: Define an object for notifications to include contact groups, emails, roles, as well as threshold and operator
 resource "azurerm_monitor_action_group" "rg_monitor" {
   count               = var.create_budget ? 1 : 0
   name                = "${var.rg_name}-monitor-group"
   resource_group_name = azurerm_resource_group.rg.name
-  short_name          = "${var.rg_name}-monitor-group"
+  short_name          = substr("mg-${var.rg_name}", 1, 12)
 }
 
 resource "azurerm_consumption_budget_resource_group" "rg_consumption_budget" {
@@ -71,11 +72,25 @@ resource "azurerm_consumption_budget_resource_group" "rg_consumption_budget" {
     }
   }
 
+  #temporary default notification
   notification {
     enabled   = true
     threshold = 75.0
     operator  = "EqualTo"
 
     contact_emails = var.notification_contact_emails
+  }
+
+  dynamic "notification" {
+    for_each = var.notifications
+    content {
+      enabled   = notification.value["enabled"]
+      threshold = notification.value["threshold"]
+      operator  = notification.value["operator"]
+
+      contact_emails = notification.value["contact_emails"]
+      contact_groups = notification.value["contact_groups"]
+      contact_roles  = notification.value["contact_roles"]
+    }
   }
 }
