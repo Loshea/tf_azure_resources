@@ -43,3 +43,8 @@ output "kube_config" {
   description = "Raw aks cluster config"
   sensitive   = true
 }
+
+output "rg_name" {
+  value       = azurerm_kubernetes_cluster.k8s.resource_group_name
+  description = "Name of the resource group"
+}
