@@ -66,3 +66,9 @@ module "k8scluster" {
   load_balancer_sku = "standard"
   #msi_id            = null
 }
+
+################################
+# TODO:  Add budget to the auto-
+# generated node resource group
+# Budgeting
+################################
