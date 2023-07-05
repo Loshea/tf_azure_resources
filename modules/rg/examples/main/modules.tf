@@ -1,20 +1,6 @@
-terraform {
-  required_version = ">= 1.0"
-
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = ">=3.4"
-    }
-    random = {
-      source  = "hashicorp/random"
-      version = "~>3.0"
-    }
-  }
-}
 
 module "rg1" {
-  source                      = "../../modules/rg"
+  source                      = "git::https://github.com/Loshea/tf_azure_resources.git//modules/rg?ref=v0.1.0"
   rg_name                     = "tf_rg1"
   location                    = "East US"
   create_costview             = true

@@ -1,0 +1,35 @@
+---
+# DO NOT EDIT
+formatter: "markdown"
+
+settings:
+  anchor: false
+  lockfile: false
+
+output:
+  file: "README.md"
+
+sections:
+  hide: [requirements]
+
+content: |-
+  ## Version Requirements
+  |  Module Version | Terraform Version | AzureRM Version |
+  |-----------------|-------------------|-----------------|
+  | < 1.0.0         | 1.5.x             | 3.4             |
+
+  ## Usage
+  
+  ```hcl
+    {{ include "examples/main/modules.tf"}}
+  ```
+  {{ .Providers }}
+
+  {{ .Modules }}
+
+  {{ .Resources }}
+
+  {{ .Inputs  }}
+
+  {{ .Outputs  }}
+...
