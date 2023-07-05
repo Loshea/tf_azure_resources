@@ -48,3 +48,13 @@ output "rg_name" {
   value       = azurerm_kubernetes_cluster.k8s.resource_group_name
   description = "Name of the resource group"
 }
+
+output "node_rg_name" {
+  value       = azurerm_kubernetes_cluster.k8s.node_resource_group
+  description = "Name of the auto generated resource group containing the cluster resources"
+}
+
+output "node_rg_id" {
+  value       = azurerm_kubernetes_cluster.k8s.node_resource_group_id
+  description = "Resource ID of the auto generated resource group containing the cluster resources"
+}

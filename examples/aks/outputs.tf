@@ -55,3 +55,13 @@ output "kube_config" {
   description = "Raw aks cluster config"
   sensitive   = true
 }
+
+output "node_rg_name" {
+  value       = module.k8scluster.node_rg_name
+  description = "Name of the auto generated resource group containing the cluster resources"
+}
+
+output "node_rg_id" {
+  value       = module.k8scluster.node_rg_id
+  description = "Resource ID of the auto generated resource group containing the cluster resources"
+}
