@@ -1,5 +1,7 @@
 #TODO:  Add validators
 
+
+
 variable "rg_name" {
   type        = string
   description = "Name of the resource group containing the cluster"
