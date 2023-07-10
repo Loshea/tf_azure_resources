@@ -1,5 +1,5 @@
 module "example_budget" {
-  source            = "../../"
+  source            = "git::https://github.com/Loshea/tf_azure_resources.git//modules/budget?ref=v0.11.0"
   rg_id             = azurerm_resource_group.rg_test.id
   budget_name       = "tf_rg1_budget"
   budget_amount     = 100
