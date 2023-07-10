@@ -4,6 +4,11 @@ repos:
     hooks:
       - id: terraform_fmt
       - id: terraform_validate
+      - id: terraform_docs
+        args:
+        - --hook-config=--add-to-existing-file=true
+        - --hook-config=--create-file-if-not-exist=true
+        - --hook-config=--config=.config/.terraform-docs.yml
       - id: terraform_tflint
         args:
           - '--args=--only=terraform_deprecated_interpolation'

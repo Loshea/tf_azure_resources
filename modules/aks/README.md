@@ -1,64 +1,58 @@
-# AKS
-Create a bare bones AKS cluster.  Outputs cluster config for kubectl and [k9s](https://k9scli.io/)
+# aks
 
-# Usage
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
 
-```
-#Using the azure api to generate a public key for the cluster:
-#TODO:  Move this into the aks module and have it toggleable
-resource "azapi_resource" "ssh_public_key" {
-  type      = "Microsoft.Compute/sshPublicKeys@2022-11-01"
-  name      = random_pet.ssh_key_name.id
-  location  = "eastus"
-  parent_id = module.tf_k8s_rg.rg_id
-}
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >=3.4 |
 
-resource "azapi_resource_action" "ssh_public_key_gen" {
-  type        = "Microsoft.Compute/sshPublicKeys@2022-11-01"
-  resource_id = azapi_resource.ssh_public_key.id
-  action      = "generateKeyPair"
-  method      = "POST"
+## Providers
 
-  response_export_values = ["publicKey"]
-}
+| Name | Version |
+|------|---------|
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.63.0 |
 
-#create the cluster:
-module "k8scluster" {
-    source = "git::https://github.com/Loshea/tf_azure_resources.git/modules/aks"
+## Modules
 
-    rg_name           = module.tf_k8s_rg.rg_name
-    location          = module.tf_k8s_rg.location
-    cluster_name      = "example_cluster"
-    dns_prefix        = "examplecluster"
-    node_pool_name    = "examplepool"
-    node_vm_size      = "Standard_D2_v2"
-    node_count        = 3
-    admin_username    = "ubuntu"
-    ssh_key           = jsondecode(azapi_resource_action.ssh_public_key_gen.output).publicKey
-    network_plugin    = "kubenet"
-    load_balancer_sku = "standard"
-}
-```
+No modules.
 
-## Generating kube config
-The module outputs are sufficient to generate the kube configuration file for kubectl
+## Resources
 
-```
-echo "$(terraform output kube_config)" > azureaks
-export KUBECONFIG='./azureaks'
-```
-Edit the config file and remove the lines "<< EOT" and "EOT".  Kubectl or k9s should now be able to connect to your new cluster.
+| Name | Type |
+|------|------|
+| [azurerm_kubernetes_cluster.k8s](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_admin_username"></a> [admin\_username](#input\_admin\_username) | Linux administrator account name | `string` | n/a | yes |
+| <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | Kubernetes Cluster Name | `string` | n/a | yes |
+| <a name="input_dns_prefix"></a> [dns\_prefix](#input\_dns\_prefix) | DNS prefix for the cluster | `string` | n/a | yes |
+| <a name="input_load_balancer_sku"></a> [load\_balancer\_sku](#input\_load\_balancer\_sku) | SKU for the ingress loadbalancer | `string` | `"standard"` | no |
+| <a name="input_location"></a> [location](#input\_location) | Region in whcih to place the cluster | `string` | n/a | yes |
+| <a name="input_network_plugin"></a> [network\_plugin](#input\_network\_plugin) | The network plugin to use [azure\|kubernet] | `string` | `"kubernet"` | no |
+| <a name="input_node_count"></a> [node\_count](#input\_node\_count) | Number of nodes in the default pool | `number` | `3` | no |
+| <a name="input_node_pool_name"></a> [node\_pool\_name](#input\_node\_pool\_name) | Name of the default node pool | `string` | n/a | yes |
+| <a name="input_node_vm_size"></a> [node\_vm\_size](#input\_node\_vm\_size) | The VM Size for the default cluster node | `string` | n/a | yes |
+| <a name="input_rg_name"></a> [rg\_name](#input\_rg\_name) | Name of the resource group containing the cluster | `string` | n/a | yes |
+| <a name="input_ssh_key"></a> [ssh\_key](#input\_ssh\_key) | Public key for the cluster | `string` | n/a | yes |
 
 ## Outputs
-The aks module defines the following outputs
-|Variable| Value | Sensitive |
-|--------|------------|------|
-|cluster_name | Name of the aks cluster | No |
-|client_certificate | AKS Cluster client certificate | Yes |
-|client_key | AKS Cluster key | Yes |
-|cluster_ca_certificate | Cluster CA certificate | Yes |
-|cluster_password | Cluster management password | Yes |
-|cluster_username  | Cluster management username | Yes |
-|host| Cluster Host name | Yes|
-|kube_config | Cluster configuration block | Yes |
-|rg_name | Name of the resource group containing the cluster | No |
+
+| Name | Description |
+|------|-------------|
+| <a name="output_client_certificate"></a> [client\_certificate](#output\_client\_certificate) | AKS cluster client certificate |
+| <a name="output_client_key"></a> [client\_key](#output\_client\_key) | Cluster Client Key |
+| <a name="output_cluster_ca_certificate"></a> [cluster\_ca\_certificate](#output\_cluster\_ca\_certificate) | Cluster CA Certificate |
+| <a name="output_cluster_name"></a> [cluster\_name](#output\_cluster\_name) | Name of the k8s cluster |
+| <a name="output_cluster_password"></a> [cluster\_password](#output\_cluster\_password) | AKS Cluster user password |
+| <a name="output_cluster_username"></a> [cluster\_username](#output\_cluster\_username) | AKS Cluster username |
+| <a name="output_host"></a> [host](#output\_host) | AKS cluster host name |
+| <a name="output_kube_config"></a> [kube\_config](#output\_kube\_config) | Raw aks cluster config |
+| <a name="output_node_rg_id"></a> [node\_rg\_id](#output\_node\_rg\_id) | Resource ID of the auto generated resource group containing the cluster resources |
+| <a name="output_node_rg_name"></a> [node\_rg\_name](#output\_node\_rg\_name) | Name of the auto generated resource group containing the cluster resources |
+| <a name="output_rg_name"></a> [rg\_name](#output\_rg\_name) | Name of the resource group |
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

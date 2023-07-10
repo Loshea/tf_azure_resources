@@ -1,3 +1,5 @@
+
+
 variable "enable_diagnostics" {
   type        = bool
   description = "Enable diagnostic settings for the attached resource"
