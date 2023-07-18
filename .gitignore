@@ -2,3 +2,6 @@
 **/*.out
 **/*.plan
 **/azurek8s
+**/go.*
+**/tests/test_output/
+**/*.log
