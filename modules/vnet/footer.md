@@ -1,2 +1,4 @@
 # Examples
-The [example](examples/main/) demonstrates use of this module to create a Virtual Network containing 3 subnets of different sizes, a VPN Gateway, and a Bastion Host
+The [example](examples/main/) demonstrates use of this module to create a Virtual Network containing 3 subnets of different sizes.
+
+The [create bastion](examples/create_bastion/) demonstrates the addition of a bastion host.
