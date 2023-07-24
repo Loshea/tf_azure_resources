@@ -13,7 +13,6 @@ module "example_budget" {
     threshold      = 85.0
     operator       = "GreaterThan"
     contact_emails = ["liam.oshea.02@gmail.com"]
-    contact_emails = ["liam.oshea.02@gmail.com"]
     contact_roles  = ["Owner"]
     contact_groups = []
   }]
