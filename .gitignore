@@ -5,3 +5,4 @@
 **/go.*
 **/tests/test_output/
 **/*.log
+**/*.tfstate
