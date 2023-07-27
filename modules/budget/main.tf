@@ -1,3 +1,11 @@
+/**
+* # Budget  
+*This module creates a resource group consumption budget, and is intended for use within the rg module.  It can stand alone, however, if it is being added to existing infrastructure.
+*
+*
+* # Architecture Diagram  
+* Eventually, I will include a diagram of the created architecture.
+*/
 resource "azurerm_consumption_budget_resource_group" "rg_consumption_budget" {
   name              = var.budget_name
   resource_group_id = var.rg_id

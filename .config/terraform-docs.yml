@@ -7,12 +7,16 @@ settings:
   lockfile: false
 
 header-from: main.tf
-footer-from: main.tf
+footer-from: footer.md
+
 output:
   file: "README.md"
 
 sections:
   hide: [requirements]
+  show:
+    - header
+    - footer
 
 content: |-
   ## Version Requirements
