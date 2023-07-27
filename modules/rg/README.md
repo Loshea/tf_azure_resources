@@ -90,7 +90,7 @@ Eventually, I will include a diagram of the created architecture.
 |------|-------------|------|---------|:--------:|
 | <a name="input_budget_amount"></a> [budget\_amount](#input\_budget\_amount) | Budget ammount for this resource group | `number` | `0` | no |
 | <a name="input_budget_end_date"></a> [budget\_end\_date](#input\_budget\_end\_date) | Budget End Date ( YYYY-mm-ddTHH:MM:SSZ) OPTIONAL | `string` | `null` | no |
-| <a name="input_budget_start_date"></a> [budget\_start\_date](#input\_budget\_start\_date) | Budget Start Date ( YYYY-mm-ddTHH:MM:SSZ) | `string` | n/a | yes |
+| <a name="input_budget_start_date"></a> [budget\_start\_date](#input\_budget\_start\_date) | Budget Start Date ( YYYY-mm-ddTHH:MM:SSZ) | `string` | `null` | no |
 | <a name="input_create_budget"></a> [create\_budget](#input\_create\_budget) | Create a spend budget for the resource group | `bool` | `false` | no |
 | <a name="input_create_costview"></a> [create\_costview](#input\_create\_costview) | Enable a cost management view for this resource group | `bool` | `true` | no |
 | <a name="input_filter_dimensions"></a> [filter\_dimensions](#input\_filter\_dimensions) | Budget filter dimensions | <pre>set(object({<br>    name   = string<br>    values = list(string)<br>  }))</pre> | `[]` | no |
@@ -105,6 +105,7 @@ Eventually, I will include a diagram of the created architecture.
 | Name | Description |
 |------|-------------|
 | <a name="output_budget_name"></a> [budget\_name](#output\_budget\_name) | Name of the associated resource group budget |
+| <a name="output_costview_name"></a> [costview\_name](#output\_costview\_name) | Name of the created cost view |
 | <a name="output_location"></a> [location](#output\_location) | Region the resource group resides in |
 | <a name="output_rg_id"></a> [rg\_id](#output\_rg\_id) | ID of the resource group |
 | <a name="output_rg_name"></a> [rg\_name](#output\_rg\_name) | Name of the resource group |
