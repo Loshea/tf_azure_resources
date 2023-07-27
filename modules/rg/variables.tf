@@ -48,6 +48,7 @@ variable "filter_tags" {
 variable "budget_start_date" {
   type        = string
   description = "Budget Start Date ( YYYY-mm-ddTHH:MM:SSZ)"
+  default     = null
 }
 
 variable "budget_end_date" {
