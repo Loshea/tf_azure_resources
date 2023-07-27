@@ -6,9 +6,8 @@ settings:
   anchor: false
   lockfile: false
 
-header-from: header.md
-footer-from: footer.md
-
+header-from: main.tf
+footer-from: main.tf
 output:
   file: "README.md"
 
