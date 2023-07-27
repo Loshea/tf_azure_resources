@@ -6,7 +6,7 @@ settings:
   anchor: false
   lockfile: false
 
-header-from: header.md
+header-from: main.tf
 footer-from: footer.md
 
 output:
@@ -14,6 +14,9 @@ output:
 
 sections:
   hide: [requirements]
+  show:
+    - header
+    - footer
 
 content: |-
   ## Version Requirements
