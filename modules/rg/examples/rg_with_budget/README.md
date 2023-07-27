@@ -38,6 +38,7 @@ No inputs.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_budget_name"></a> [budget\_name](#output\_budget\_name) | Name of the budget associated with the resource grouo |
 | <a name="output_location"></a> [location](#output\_location) | Location the new resource group was created in |
 | <a name="output_rg_name"></a> [rg\_name](#output\_rg\_name) | Name of the resource group |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
